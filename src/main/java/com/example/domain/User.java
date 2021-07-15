@@ -1,14 +1,26 @@
 package com.example.domain;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+import org.bson.types.ObjectId;
+
+@Document(collection = "users")
 public class User {
 	
-	private String id;
+	@MongoId
+	@Field(name = "_id")
+	private ObjectId id;
+	@Field(name = "name")
 	private String name;
+	@Field(name = "lastName")
 	private String lastName;
+	@Field(name = "password")
 	private String password;
+	@Field(name = "email")
 	private String email;
 	
-	public void setId(String id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 	
@@ -29,7 +41,7 @@ public class User {
 	}
 	
 	public String getId() {
-		return id;
+		return id.toString();
 	}
 	
 	public String getName() {
@@ -50,7 +62,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User[id=" + id + ", name" + name + ", lastName=" + lastName + ", password=" + password + ", email=" + email + "]";
+		return "User [id=" + id + ", name" + name + ", lastName=" + lastName + ", password=" + password + ", email=" + email + "]";
 	}
 
 }
