@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 
 import com.example.repository.IUserRepository;
 import com.example.domain.User;
+import com.example.controller.exception.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -20,7 +21,7 @@ public class UserService {
 	}
 	
 	public User readById(String id) {
-		return repository.findById(new ObjectId(id)).orElseThrow(RuntimeException::new);
+		return repository.findById(new ObjectId(id)).orElseThrow(() -> new ResourceNotFoundException("User with id=" + id + " not found in database"));
 	}
 	
 	public User create(User user) {
