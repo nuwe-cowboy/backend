@@ -3,22 +3,37 @@ package com.example.domain;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.MongoId;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import org.bson.types.ObjectId;
 
 @Document(collection = "users")
 public class User {
 	
 	@MongoId
-	@Field(name = "_id")
+	@Field("_id")
+	@JsonProperty("id")
 	private ObjectId id;
-	@Field(name = "name")
+	@Field("name")
 	private String name;
-	@Field(name = "lastName")
+	@Field("lastName")
 	private String lastName;
-	@Field(name = "password")
+	@Field("password")
+	@NotBlank(message = "Password is mandatory")
+	@Size(min = 8)
 	private String password;
-	@Field(name = "email")
+	@Field("email")
+	@Email(message = "Malformed email address")
+	@NotBlank(message = "Email is mandatory")
 	private String email;
+	
+	public User() {
+	}
 	
 	public void setId(ObjectId id) {
 		this.id = id;

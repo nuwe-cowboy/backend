@@ -2,6 +2,8 @@ package com.example.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
 
 import com.example.service.UserService;
 import com.example.domain.User;
@@ -33,16 +37,18 @@ public class UserRestController {
 	}
 	
 	@PostMapping
-	public User create(@RequestBody User user) {
+	@ResponseStatus(HttpStatus.CREATED)
+	public User create(@Valid @RequestBody User user) {
 		return service.create(user);
 	}
 	
 	@PutMapping("/{id}")
-	public User updateById(@PathVariable String id, @RequestBody User user) {
+	public User updateById(@PathVariable String id, @Valid @RequestBody User user) {
 		return service.updateById(id, user);
 	}
 	
 	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteById(@PathVariable String id) {
 		service.deleteById(id);
 	}
