@@ -1,47 +1,42 @@
 package com.example.controller.exception;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
+
+import org.springframework.http.HttpStatus;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class CustomExceptionResponse {
 	
-	private ZonedDateTime timestamp;
-	private int status;
-	private String error;
+	@JsonFormat(pattern = "dd:MM:yyyy hh:mm:ss")
+	private LocalDateTime timestamp;
+	private HttpStatus status;
 	private String message;
 	
-	public CustomExceptionResponse(ZonedDateTime timestamp, int status, String error, String message) {
+	public CustomExceptionResponse(LocalDateTime timestamp, HttpStatus status, String message) {
 		this.timestamp = timestamp;
 		this.status = status;
-		this.error = error;
 		this.message = message;
 	}
 	
-	public void setTimestamp(ZonedDateTime timestamp) {
+	public void setTimestamp(LocalDateTime timestamp) {
 		this.timestamp = timestamp;
 	}
 	
-	public void setStatus(int status) {
+	public void setStatus(HttpStatus status) {
 		this.status = status;
-	}
-	
-	public void setError(String error) {
-		this.error = error;
 	}
 	
 	public void setMessage(String message) {
 		this.message = message;
 	}
 	
-	public ZonedDateTime getTimestamp() {
+	public LocalDateTime getTimestamp() {
 		return timestamp;
 	}
 	
-	public int getStatus() {
+	public HttpStatus getStatus() {
 		return status;
-	}
-	
-	public String getError() {
-		return error;
 	}
 	
 	public String getMessage() {
