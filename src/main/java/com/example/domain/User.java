@@ -1,16 +1,16 @@
 package com.example.domain;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.MongoId;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.UUID;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Document(collection = "users")
 public class User {
@@ -25,7 +25,7 @@ public class User {
 	private String lastName;
 	@Field("password")
 	@NotBlank(message = "Password is mandatory")
-	@Size(min = 8)
+	@Size(min = 8, message = "Size must be greater than or equal to 8")
 	private String password;
 	@Field("email")
 	@Email(message = "Malformed email address")
