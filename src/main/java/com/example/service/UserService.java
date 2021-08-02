@@ -1,10 +1,10 @@
 package com.example.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.bson.types.ObjectId;
 
 import com.example.repository.IUserRepository;
 import com.example.domain.User;
@@ -20,21 +20,21 @@ public class UserService {
 		return repository.findAll();
 	}
 	
-	public User readById(String id) {
-		return repository.findById(new ObjectId(id)).orElseThrow(() -> new ResourceNotFoundException("User with id=" + id + " not found in database"));
+	public User readById(UUID id) {
+		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User with id=" + id + " not found in database"));
 	}
 	
 	public User create(User user) {
 		return repository.save(user);
 	}
 	
-	public User updateById(String id, User user) {
-		user.setId(new ObjectId(id));
+	public User updateById(UUID id, User user) {
+		user.setId(id);
 		return repository.save(user);
 	}
 	
-	public void deleteById(String id) {
-		repository.deleteById(new ObjectId(id));
+	public void deleteById(UUID id) {
+		repository.deleteById(id);
 	}
 	
 }

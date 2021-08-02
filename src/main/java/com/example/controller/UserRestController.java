@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -32,7 +33,7 @@ public class UserRestController {
 	}
 	
 	@GetMapping("/{id}")
-	public User readById(@PathVariable String id) {
+	public User readById(@PathVariable UUID id) {
 		return service.readById(id);
 	}
 	
@@ -43,13 +44,13 @@ public class UserRestController {
 	}
 	
 	@PutMapping("/{id}")
-	public User updateById(@PathVariable String id, @Valid @RequestBody User user) {
+	public User updateById(@PathVariable UUID id, @Valid @RequestBody User user) {
 		return service.updateById(id, user);
 	}
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteById(@PathVariable String id) {
+	public void deleteById(@PathVariable UUID id) {
 		service.deleteById(id);
 	}
 	

@@ -6,11 +6,11 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.UUID;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import org.bson.types.ObjectId;
 
 @Document(collection = "users")
 public class User {
@@ -18,7 +18,7 @@ public class User {
 	@MongoId
 	@Field("_id")
 	@JsonProperty("id")
-	private ObjectId id;
+	private UUID id;
 	@Field("name")
 	private String name;
 	@Field("lastName")
@@ -33,9 +33,10 @@ public class User {
 	private String email;
 	
 	public User() {
+		id = UUID.randomUUID();
 	}
 	
-	public void setId(ObjectId id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 	
@@ -55,8 +56,8 @@ public class User {
 		this.email = email;
 	}
 	
-	public String getId() {
-		return id.toString();
+	public UUID getId() {
+		return id;
 	}
 	
 	public String getName() {

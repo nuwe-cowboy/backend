@@ -9,10 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import javax.validation.constraints.NotBlank;
-
-import org.bson.types.ObjectId;
 
 @Document(collection = "articles")
 public class Article {
@@ -20,7 +19,7 @@ public class Article {
 	@MongoId
 	@Field("_id")
 	@JsonProperty("id")
-	private ObjectId id;
+	private UUID id;
 	@Field("title")
 	@NotBlank(message = "Title is mandatory")
 	private String title;
@@ -28,13 +27,14 @@ public class Article {
 	@NotBlank(message = "Body is mandatory")
 	private String body;
 	@Field("timestamp")
-	@JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
+	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	private LocalDateTime timestamp;
 	
 	public Article() {
+		id = UUID.randomUUID();
 	}
 	
-	public void setId(ObjectId id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 	
@@ -50,8 +50,8 @@ public class Article {
 		this.timestamp = timestamp;
 	}
 	
-	public String getId() {
-		return id.toString();
+	public UUID getId() {
+		return id;
 	}
 	
 	public String getTitle() {

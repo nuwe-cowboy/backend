@@ -2,10 +2,10 @@ package com.example.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.bson.types.ObjectId;
 
 import com.example.repository.IArticleRepository;
 import com.example.domain.Article;
@@ -21,8 +21,8 @@ public class ArticleService {
 		return repository.findAll();
 	}
 	
-	public Article readById(String id) {
-		return repository.findById(new ObjectId(id)).orElseThrow(() -> new ResourceNotFoundException("Article with id=" + id + " not found in database"));
+	public Article readById(UUID id) {
+		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Article with id=" + id + " not found in database"));
 	}
 	
 	public Article create(Article article) {
@@ -30,13 +30,13 @@ public class ArticleService {
 		return repository.save(article);
 	}
 	
-	public Article updateById(String id, Article article) {
-		article.setId(new ObjectId(id));
+	public Article updateById(UUID id, Article article) {
+		article.setId(id);
 		return repository.save(article);
 	}
 	
-	public void deleteById(String id) {
-		repository.deleteById(new ObjectId(id));
+	public void deleteById(UUID id) {
+		repository.deleteById(id);
 	}
 	
 }
