@@ -20,7 +20,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.addFilterBefore(new Filter(), UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/articles/**", "/events/**").permitAll()
-				.antMatchers(HttpMethod.POST, "/users/login").permitAll()
+				.antMatchers(HttpMethod.POST, "/users", "/login").permitAll()
 				.anyRequest().authenticated();
 	}
 	
