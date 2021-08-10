@@ -25,8 +25,8 @@ public class Filter extends OncePerRequestFilter {
 		HEADER = "Authorization",
 		PREFIX = "Bearer ";
 	
-	@Value("${secret}")
-	private String secret;
+	//@Value("${secret}")
+	private String secret = "mySecretKey";
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
