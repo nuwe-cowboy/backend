@@ -11,25 +11,13 @@
 				{
 					"name": "read",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users",
-							"protocol": "http",
+							"raw": "{{origin}}/users",
 							"host": [
-								"localhost"
+								"{{origin}}"
 							],
-							"port": "8080",
 							"path": [
 								"users"
 							]
@@ -43,15 +31,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/60f054fe1b05db32691ad8fc",
-							"protocol": "http",
+							"raw": "{{origin}}/users/{{id}}",
 							"host": [
-								"localhost"
+								"{{origin}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"60f054fe1b05db32691ad8fc"
+								"{{id}}"
 							]
 						}
 					},
@@ -60,21 +46,11 @@
 				{
 					"name": "create",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"password\": \"123\",\r\n    \"email\": \"123@example.com\"\r\n}",
+							"raw": "{\r\n    \"name\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"password\": \"password\",\r\n    \"email\": \"123@example.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -82,12 +58,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users",
-							"protocol": "http",
+							"raw": "{{origin}}/users",
 							"host": [
-								"localhost"
+								"{{origin}}"
 							],
-							"port": "8080",
 							"path": [
 								"users"
 							]
@@ -98,16 +72,6 @@
 				{
 					"name": "updateById",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -120,12 +84,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/{{id}}",
-							"protocol": "http",
+							"raw": "{{origin}}/users/{{id}}",
 							"host": [
-								"localhost"
+								"{{origin}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
 								"{{id}}"
@@ -137,25 +99,13 @@
 				{
 					"name": "deleteById",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/{{id}}",
-							"protocol": "http",
+							"raw": "{{origin}}/users/{{id}}",
 							"host": [
-								"localhost"
+								"{{origin}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
 								"{{id}}"
@@ -165,16 +115,6 @@
 					"response": []
 				}
 			],
-			"auth": {
-				"type": "bearer",
-				"bearer": [
-					{
-						"key": "token",
-						"value": "{{token}}",
-						"type": "string"
-					}
-				]
-			},
 			"event": [
 				{
 					"listen": "prerequest",
@@ -205,12 +145,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/articles",
-							"protocol": "http",
+							"raw": "{{origin}}/articles",
 							"host": [
-								"localhost"
+								"{{origin}}"
 							],
-							"port": "8080",
 							"path": [
 								"articles"
 							]
@@ -224,12 +162,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/articles/{{id}}",
-							"protocol": "http",
+							"raw": "{{origin}}/articles/{{id}}",
 							"host": [
-								"localhost"
+								"{{origin}}"
 							],
-							"port": "8080",
 							"path": [
 								"articles",
 								"{{id}}"
@@ -253,12 +189,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/articles",
-							"protocol": "http",
+							"raw": "{{origin}}/articles",
 							"host": [
-								"localhost"
+								"{{origin}}"
 							],
-							"port": "8080",
 							"path": [
 								"articles"
 							]
@@ -281,12 +215,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/articles/{{id}}",
-							"protocol": "http",
+							"raw": "{{origin}}/articles/{{id}}",
 							"host": [
-								"localhost"
+								"{{origin}}"
 							],
-							"port": "8080",
 							"path": [
 								"articles",
 								"{{id}}"
@@ -301,12 +233,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/articles/{{id}}",
-							"protocol": "http",
+							"raw": "{{origin}}/articles/{{id}}",
 							"host": [
-								"localhost"
+								"{{origin}}"
 							],
-							"port": "8080",
 							"path": [
 								"articles",
 								"{{id}}"
@@ -318,32 +248,115 @@
 			]
 		},
 		{
-			"name": "Login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Event",
+			"item": [
+				{
+					"name": "read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{origin}}/events",
+							"host": [
+								"{{origin}}"
+							],
+							"path": [
+								"events"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"login"
-					]
+				{
+					"name": "readById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{origin}}/events/{{id}}",
+							"host": [
+								"{{origin}}"
+							],
+							"path": [
+								"events",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Lorem ipsum\",\r\n    \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc finibus urna condimentum, sodales augue ut, pharetra metus. Vestibulum id nisi sed risus porttitor convallis. Etiam ut luctus leo. Sed venenatis faucibus ligula, vel blandit arcu fermentum lobortis. Morbi dictum tincidunt tortor, sit amet molestie mi euismod id.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{origin}}/events",
+							"host": [
+								"{{origin}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Dolor sit amet\",\r\n    \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc finibus urna condimentum, sodales augue ut, pharetra metus. Vestibulum id nisi sed risus porttitor convallis. Etiam ut luctus leo. Sed venenatis faucibus ligula, vel blandit arcu fermentum lobortis. Morbi dictum tincidunt tortor, sit amet molestie mi euismod id.\",\r\n    \"timestamp\": \"2021-07-26T18:46:21.3712227\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{origin}}/events/{{id}}",
+							"host": [
+								"{{origin}}"
+							],
+							"path": [
+								"events",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{origin}}/events/{{id}}",
+							"host": [
+								"{{origin}}"
+							],
+							"path": [
+								"events",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	],
 	"event": [
@@ -368,11 +381,16 @@
 	],
 	"variable": [
 		{
-			"key": "id",
-			"value": ""
+			"key": "origin",
+			"value": "http://localhost:8080"
 		},
 		{
-			"key": "token",
+			"key": "origin",
+			"value": "https://mplqnp.herokuapp.com",
+			"disabled": true
+		},
+		{
+			"key": "id",
 			"value": ""
 		}
 	]
