@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
@@ -84,6 +85,17 @@ public class GlobalRestControllerAdvice {
 			LocalDateTime.now(),
 			HttpStatus.INTERNAL_SERVER_ERROR,
 			"Missing Path Variable",
+			null,
+			null);
+	}
+	
+	@ExceptionHandler(DuplicateKeyException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public CustomExceptionResponse handleException(DuplicateKeyException e) {
+		return new CustomExceptionResponse(
+			LocalDateTime.now(),
+			HttpStatus.INTERNAL_SERVER_ERROR,
+			"Duplicate Key",
 			null,
 			null);
 	}

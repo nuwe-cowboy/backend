@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.controller.exception.ResourceNotFoundException;
+import com.example.domain.ERole;
 import com.example.domain.User;
 import com.example.repository.IUserRepository;
 
@@ -30,7 +31,8 @@ public class UserService {
 			.orElseThrow(() -> new ResourceNotFoundException("User with email=" + email + " and password=" + password + " not found"));
 	}
 	
-	public User create(User user) {
+	public User create(User user, ERole role) {
+		user.setRole(role);
 		return repository.save(user);
 	}
 	

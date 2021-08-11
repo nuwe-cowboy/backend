@@ -1,18 +1,16 @@
 package com.example.security;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import com.example.domain.ERole;
 import com.example.domain.User;
 import com.example.service.UserService;
 
@@ -32,9 +30,8 @@ public class SecurityService {
 		String username = login.get("username");
 		String password = login.get("password");
 		
-		this.authenticate(username, password);
-		
-		List<GrantedAuthority> authorities = new ArrayList<>();
+		User user = this.authenticate(username, password);
+		List<String> authorities = this.authorize(user);
 		
 		return this.generateToken(username, authorities);
 	}
@@ -43,16 +40,22 @@ public class SecurityService {
 		return service.readByEmailAndPassword(username, password);
 	}
 	
-	public Map<String, String> generateToken(String username, List<GrantedAuthority> authorities) {
+	public List<String> authorize(User user) {
+		ERole role = user.getRole();
+		
+		List<String> authorities = new ArrayList<>();
+		authorities.add("ROLE_" + role);
+		
+		return authorities;
+	}
+	
+	public Map<String, String> generateToken(String username, List<String> authorities) {
 		long time = System.currentTimeMillis();
 		
 		String token = Jwts
 			.builder()
 			.setSubject(username)
-			.claim("authorities", authorities
-				.stream()
-				.map(GrantedAuthority::getAuthority)
-				.collect(Collectors.toList()))
+			.claim("authorities", authorities)
 			.setIssuedAt(new Date(time))
 			.setExpiration(new Date(time + 600000))
 			.signWith(SignatureAlgorithm.HS512, secret.getBytes())

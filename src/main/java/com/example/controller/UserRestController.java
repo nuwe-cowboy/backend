@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.domain.ERole;
 import com.example.domain.User;
 import com.example.service.UserService;
 
@@ -39,8 +40,14 @@ public class UserRestController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public User create(@Valid @RequestBody User user) {
-		return service.create(user);
+	public User createDefault(@Valid @RequestBody User user) {
+		return service.create(user, ERole.DEFAULT);
+	}
+	
+	@PostMapping("/admin")
+	@ResponseStatus(HttpStatus.CREATED)
+	public User createAdmin(@Valid @RequestBody User user) {
+		return service.create(user, ERole.ADMIN);
 	}
 	
 	@PutMapping("/{id}")

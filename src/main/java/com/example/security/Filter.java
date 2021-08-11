@@ -1,7 +1,6 @@
 package com.example.security;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,7 +59,8 @@ public class Filter extends OncePerRequestFilter {
 	}
 	
 	private void setUpSpringAuthentication(Claims claims) {
-		List<String> authorities = Arrays.asList(claims.get("authorities").toString().split(","));
+		@SuppressWarnings("unchecked")
+		List<String> authorities = (List<String>) claims.get("authorities");
 		
 		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 			claims

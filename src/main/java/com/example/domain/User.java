@@ -6,6 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -30,7 +31,10 @@ public class User {
 	@Field("email")
 	@Email(message = "Malformed email address")
 	@NotBlank(message = "Email is mandatory")
+	@Indexed(unique = true)
 	private String email;
+	@Field("role")
+	private ERole role;
 	
 	public User() {
 		id = UUID.randomUUID();
@@ -56,6 +60,10 @@ public class User {
 		this.email = email;
 	}
 	
+	public void setRole(ERole role) {
+		this.role = role;
+	}
+	
 	public UUID getId() {
 		return id;
 	}
@@ -76,9 +84,13 @@ public class User {
 		return email;
 	}
 	
+	public ERole getRole() {
+		return role;
+	}
+	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name" + name + ", lastName=" + lastName + ", password=" + password + ", email=" + email + "]";
+		return "User [id=" + id + ", name" + name + ", lastName=" + lastName + ", password=" + password + ", email=" + email + ", role=" + role + "]";
 	}
 
 }
