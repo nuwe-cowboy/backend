@@ -1,5 +1,6 @@
 package com.example.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,11 +14,14 @@ import com.example.security.Filter;
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
+	@Autowired
+	private Filter filter;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.csrf().disable()
-			.addFilterBefore(new Filter(), UsernamePasswordAuthenticationFilter.class)
+			.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/articles/**", "/events/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/users/**").hasAnyRole("DEFAULT", "ADMIN")

@@ -11,6 +11,16 @@
 				{
 					"name": "read",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -28,6 +38,16 @@
 				{
 					"name": "readById",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -44,13 +64,13 @@
 					"response": []
 				},
 				{
-					"name": "create",
+					"name": "createDefault",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"password\": \"password\",\r\n    \"email\": \"123@example.com\"\r\n}",
+							"raw": "{\r\n    \"name\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"default@example.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -58,12 +78,50 @@
 							}
 						},
 						"url": {
-							"raw": "{{origin}}/users",
+							"raw": "{{origin}}/users/default",
 							"host": [
 								"{{origin}}"
 							],
 							"path": [
-								"users"
+								"users",
+								"default"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createAdmin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane\",\r\n    \"lastName\": \"Doe\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"admin@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{origin}}/users/admin",
+							"host": [
+								"{{origin}}"
+							],
+							"path": [
+								"users",
+								"admin"
 							]
 						}
 					},
@@ -72,11 +130,21 @@
 				{
 					"name": "updateById",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Jane\",\r\n    \"lastName\": \"Doe\",\r\n    \"password\": \"123\",\r\n    \"email\": \"123@example.com\"\r\n}",
+							"raw": "{\r\n    \"name\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"update@example.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -99,6 +167,16 @@
 				{
 					"name": "deleteById",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -177,6 +255,16 @@
 				{
 					"name": "create",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -203,6 +291,16 @@
 				{
 					"name": "updateById",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -230,6 +328,16 @@
 				{
 					"name": "deleteById",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -288,6 +396,16 @@
 				{
 					"name": "create",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -314,6 +432,16 @@
 				{
 					"name": "updateById",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -341,6 +469,16 @@
 				{
 					"name": "deleteById",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -357,6 +495,32 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"default@example.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{origin}}/login",
+					"host": [
+						"{{origin}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -386,11 +550,14 @@
 		},
 		{
 			"key": "origin",
-			"value": "https://mplqnp.herokuapp.com",
-			"disabled": true
+			"value": "https://mplqnp.herokuapp.com"
 		},
 		{
 			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "token",
 			"value": ""
 		}
 	]

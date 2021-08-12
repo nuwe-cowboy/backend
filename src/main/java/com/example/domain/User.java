@@ -24,15 +24,15 @@ public class User {
 	private String name;
 	@Field("lastName")
 	private String lastName;
-	@Field("password")
-	@NotBlank(message = "Password is mandatory")
-	@Size(min = 8, message = "Size must be greater than or equal to 8")
-	private String password;
 	@Field("email")
 	@Email(message = "Malformed email address")
 	@NotBlank(message = "Email is mandatory")
 	@Indexed(unique = true)
 	private String email;
+	@Field("password")
+	@NotBlank(message = "Password is mandatory")
+	@Size(min = 6, message = "Size must be greater than or equal to 8")
+	private String password;
 	@Field("role")
 	private ERole role;
 	
@@ -52,12 +52,12 @@ public class User {
 		this.lastName = lastName;
 	}
 	
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	public void setRole(ERole role) {
@@ -76,12 +76,12 @@ public class User {
 		return lastName;
 	}
 	
-	public String getPassword() {
-		return password;
-	}
-	
 	public String getEmail() {
 		return email;
+	}
+	
+	public String getPassword() {
+		return password;
 	}
 	
 	public ERole getRole() {
@@ -90,7 +90,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name" + name + ", lastName=" + lastName + ", password=" + password + ", email=" + email + ", role=" + role + "]";
+		return "User [id=" + id + ", name" + name + ", lastName=" + lastName + ", email=" + email + ", password=" + password + ", role=" + role + "]";
 	}
 
 }

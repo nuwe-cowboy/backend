@@ -18,13 +18,13 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
-public class SecurityService {
+public class TokenService {
 	
 	@Autowired
 	private UserService service;
 	
-	//@Value("${secret}")
-	private String secret = "mySecretKey";
+	@Value("${secret}")
+	private String secret;
 	
 	public Map<String, String> login(Map<String, String> login) {
 		String username = login.get("username");
@@ -36,11 +36,11 @@ public class SecurityService {
 		return this.generateToken(username, authorities);
 	}
 	
-	public User authenticate(String username, String password) {
+	private User authenticate(String username, String password) {
 		return service.readByEmailAndPassword(username, password);
 	}
 	
-	public List<String> authorize(User user) {
+	private List<String> authorize(User user) {
 		ERole role = user.getRole();
 		
 		List<String> authorities = new ArrayList<>();
@@ -49,7 +49,7 @@ public class SecurityService {
 		return authorities;
 	}
 	
-	public Map<String, String> generateToken(String username, List<String> authorities) {
+	private Map<String, String> generateToken(String username, List<String> authorities) {
 		long time = System.currentTimeMillis();
 		
 		String token = Jwts

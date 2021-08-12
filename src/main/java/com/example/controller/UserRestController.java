@@ -38,7 +38,7 @@ public class UserRestController {
 		return service.readById(id);
 	}
 	
-	@PostMapping
+	@PostMapping("/default")
 	@ResponseStatus(HttpStatus.CREATED)
 	public User createDefault(@Valid @RequestBody User user) {
 		return service.create(user, ERole.DEFAULT);

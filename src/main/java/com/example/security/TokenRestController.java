@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class SecurityRestController {
+public class TokenRestController {
 	
 	@Autowired
-	private SecurityService service;
+	private TokenService service;
 	
 	@PostMapping("/login")
 	public Map<String, String> login(@RequestBody Map<String, String> login) {
