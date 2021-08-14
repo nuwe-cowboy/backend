@@ -1,8 +1,18 @@
-# API de REST
+# "Muévete por los que no pueden"
+## Summer Coding League - API REST
 
-*desc (Java, Spring Boot, Gradle) - imagen db*
+## Descripción
+En "Muévete por los que no pueden", realizan eventos deportivos y por lo tanto necesitan 
+una API para gestionar todos estos acontecimientos.
 
-https://mplqnp.herokuapp.com/
+
+## Stack Tecnológico
+- Java
+- Spring Boot
+- Gradle
+- MongoDB
+- [Heroku](https://www.heroku.com/)
+
 
 ## Endpoints
 
@@ -48,7 +58,7 @@ Eventos deportivos.
 
 Event: title, description, target, timestamp
 
-## Distribución
+## Estructura de proyecto
 
 ```
 backend/
@@ -99,19 +109,56 @@ backend/
 
 Pasos a seguir:
 
-1. Clona el proyecto: `git clone https://github.com/nuwe-cowboy/backend`.
+1. Clona el proyecto:   
+```git clone https://github.com/nuwe-cowboy/backend```.
 
 #### Línea de comandos
 
-2. Ejecución: `gradlew.bat bootRun` en Windows o `./gradlew bootRun` en Linux.
+2. Ejecución:  
+- En Windows  
+```gradlew.bat bootRun```  
+- en Linux  
+  ```./gradlew bootRun```
 
 #### Eclipse
 
-2. Importación: File > Import… > Existing Gradle Project.
-3. Ejecución: Package Explorer > Click derecho encima del nombre del proyecto > Run As > Spring Boot App.
+2. Importación: 
+```
+File > Import… > Existing Gradle Project
+```
+3. Ejecución: 
+```
+Package Explorer > Click derecho encima del nombre del proyecto > Run As > Spring Boot App.
+```
 
 Si incluyes nuevas dependencias en `build.gradle`:
 
 4. Package Explorer > Click derecho encima del nombre del proyecto > Gradle > Refresh Gradle Project.
 
-*IntelliJ IDEA?*
+#### IntelliJ IDEA
+2. Importación:
+```
+File > Open > Seleccionar el build.gradle del proyecto > Open > Open as Project > Trust Project
+```
+
+3. Ejecución:
+```
+Run > Run App
+```
+- o bien
+```
+Clic derecho en el main de la app: App > Run App
+```
+
+## Links
+### Git
+- [Git Frontend Repository](https://github.com/nuwe-cowboy/frontend)
+- [Git Backend Repository](https://github.com/nuwe-cowboy/backend)
+
+
+### Deploy
+- [Frontend Deploy](https://muevete.netlify.app/)
+- [Backend Deploy](https://mplqnp.herokuapp.com/)
+
+
+Made with :heart: by Nuwe Cowboy Team
