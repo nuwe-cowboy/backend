@@ -10,7 +10,7 @@ import com.example.domain.User;
 
 @Repository
 public interface IUserRepository extends MongoRepository<User, UUID> {
-	
-	Optional<User> findByEmailAndPassword(String email, String password);
-	
+
+	Optional<User> findByEmail(String email);
+		
 }

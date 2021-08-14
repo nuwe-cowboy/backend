@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.controller.exception.ResourceNotFoundException;
@@ -17,6 +18,9 @@ public class UserService {
 	@Autowired
 	private IUserRepository repository;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	public List<User> read() {
 		return repository.findAll();
 	}
@@ -26,12 +30,13 @@ public class UserService {
 			.orElseThrow(() -> new ResourceNotFoundException("User with id=" + id + " not found"));
 	}
 	
-	public User readByEmailAndPassword(String email, String password) {
-		return repository.findByEmailAndPassword(email, password)
-			.orElseThrow(() -> new ResourceNotFoundException("User with email=" + email + " and password=" + password + " not found"));
+	public User readByEmail(String email) {
+		return repository.findByEmail(email)
+			.orElseThrow(() -> new ResourceNotFoundException("User with email=" + email + " not found"));
 	}
 	
 	public User create(User user, ERole role) {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setRole(role);
 		return repository.save(user);
 	}

@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.ERole;
@@ -23,6 +25,9 @@ public class TokenService {
 	@Autowired
 	private UserService service;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@Value("${secret}")
 	private String secret;
 	
@@ -37,7 +42,12 @@ public class TokenService {
 	}
 	
 	private User authenticate(String username, String password) {
-		return service.readByEmailAndPassword(username, password);
+		User user = service.readByEmail(username);
+		
+		if (!passwordEncoder.matches(password, user.getPassword()))
+			throw new BadCredentialsException("Authentication failed");
+		
+		return user;
 	}
 	
 	private List<String> authorize(User user) {
