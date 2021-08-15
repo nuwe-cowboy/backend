@@ -1,54 +1,132 @@
-# API de REST
+# API de REST - Muévete por los que no pueden
 
-*desc (Java, Spring Boot, Gradle) - imagen db*
+## Descripción
 
-https://mplqnp.herokuapp.com/
+[Muévete por los que no pueden](https://mueveteporlosquenopueden.org/) es una organización sin ánimo de lucro conducida por voluntarios. Sus objetivos son divulgar y concienciar sobre las enfermedades raras o minoritarias, recaudar fondos para su investigación e impulsar el deporte.
+
+Necesitan una aplicación web y móvil que sea accesible y les ayude a automatizar procesos que actualmente realizan de forma manual.
+
+## Enlaces
+
+Frontend: https://muevete.netlify.app/ - Repositorio: https://github.com/nuwe-cowboy/frontend
+
+Backend: https://mplqnp.herokuapp.com/
+
+## Stack
+
+- Java
+- Gradle
+- Spring Framework
+- MongoDB Atlas (persistencia)
+- Heroku (despliegue)
+- Postman (testeo)
 
 ## Endpoints
 
-### Usuarios
+Autenticación basada en JSON Web Tokens (JWT). Encriptación con BCryptPasswordEncoder.
+
+| Método | Endpoint | Request body | Rol | Descripción |
+| :---: | :---: | :---: | :---: | :--- |
+| `POST` | `/login` | username, password | | Devuelve un token. |
+
+```json
+{
+	"username": "test@example.com",
+	"password": "123456"
+}
+```
+
+Algunas peticiones solo se pueden realizar si el usuario está logueado y tiene un rol determinado.
+
+### Users
 
 Usuarios registrados.
 
-| Método | Endpoint | Request body | Descripción |
-| :---: | :---: | :---: | :--- |
-| `GET` | `/users` | | Devuelve todos los usuarios. |
-| `GET` | `/users/{id}` | | Devuelve un usuario a partir de su ID. |
-| `POST` | `/users` | User | Crea un nuevo usuario. |
-| `PUT` | `/users/{id}` | User | Actualiza un usuario a partir de su ID. |
-| `DELETE` | `/users/{id}` | | Elimina un usuario a partir de su ID. |
+| Método | Endpoint | Request body | Rol | Descripción |
+| :---: | :---: | :---: | :---: | :--- |
+| `GET` | `/users` | | `ADMIN` | Devuelve todos los usuarios. |
+| `GET` | `/users/{id}` | | `DEFAULT` o `ADMIN` | Devuelve un usuario. |
+| `POST` | `/users/default` | User | | Crea un usuario con el rol `DEFAULT`. |
+| `POST` | `/users/admin` | User | `ADMIN` | Crea un usuario con el rol `ADMIN`. |
+| `PUT` | `/users/{id}` | User | `ADMIN` | Actualiza un usuario. |
+| `DELETE` | `/users/{id}` | | `ADMIN` | Elimina un usuario. |
 
-User: name, lastName, password, email
+```json
+{
+	"id": "11110000-0000-0000-0000-000000000000",
+	"name": "John",
+	"lastName": "Doe",
+	"email": "test@example.com",
+	"password": "123456",
+	"role": "DEFAULT"
+}
+```
 
-### Artículos
+### Articles
 
-Artículos publicados en el newsletter.
+Artículos publicados en la revista.
 
-| Método | Endpoint | Request body | Descripción |
-| :---: | :---: | :---: | :--- |
-| `GET` | `/articles` | | Devuelve todos los artículos. |
-| `GET` | `/articles/{id}` | | Devuelve un artículo a partir de su ID. |
-| `POST` | `/articles` | Article | Crea un nuevo artículo. |
-| `PUT` | `/articles/{id}` | Article | Actualiza un artículo a partir de su ID. |
-| `DELETE` | `/articles/{id}` | | Elimina un artículo a partir de su ID. |
+| Método | Endpoint | Request body | Rol | Descripción |
+| :---: | :---: | :---: | :---: | :--- |
+| `GET` | `/articles` | | | Devuelve todos los artículos. |
+| `GET` | `/articles/{id}` | | | Devuelve un artículo. |
+| `POST` | `/articles` | Article | `ADMIN` | Crea un artículo. |
+| `PUT` | `/articles/{id}` | Article | `ADMIN` | Actualiza un artículo. |
+| `DELETE` | `/articles/{id}` | | `ADMIN` | Elimina un artículo. |
 
-Article: title, description, timestamp
+```json
+{
+	"id": "11110000-0000-0000-0000-000000000000",
+	"title": "Lorem ipsum",
+	"body": "Dolor sit amet",
+	"timestamp": "01-01-2001 00:00:00"
+}
+```
 
-### Eventos
+### Events
 
 Eventos deportivos.
 
-| Método | Endpoint | Request body | Descripción |
-| :---: | :---: | :---: | :--- |
-| `GET` | `/events` | | Devuelve todos los eventos. |
-| `GET` | `/events/{id}` | | Devuelve un evento a partir de su ID. |
-| `POST` | `/events` | Event | Crea un nuevo evento. |
-| `PUT` | `/events/{id}` | Event | Actualiza un evento a partir de su ID. |
-| `DELETE` | `/events/{id}` | | Elimina un evento a partir de su ID. |
+| Método | Endpoint | Request body | Rol | Descripción |
+| :---: | :---: | :---: | :---: | :--- |
+| `GET` | `/events` | | | Devuelve todos los eventos. |
+| `GET` | `/events/{id}` | | | Devuelve un evento. |
+| `POST` | `/events` | Event | `ADMIN` | Crea un evento. |
+| `PUT` | `/events/{id}` | Event | `ADMIN` | Actualiza un evento. |
+| `DELETE` | `/events/{id}` | | `ADMIN` | Elimina un evento. |
 
-Event: title, description, target, timestamp
+```json
+{
+	"id": "11110000-0000-0000-0000-000000000000",
+	"title": "Lorem ipsum",
+	"body": "Dolor sit amet",
+	"goal": 100,
+	"timestamp": "01-01-2001 00:00:00"
+}
+```
 
-## Distribución
+### UserEvents
+
+Relación many-to-many. Inscripciones a eventos.
+
+| Método | Endpoint | Request body | Rol | Descripción |
+| :---: | :---: | :---: | :---: | :--- |
+| `GET` | `/users/{userId}/events` | | `DEFAULT` o `ADMIN` | Devuelve todas las inscripciones a eventos de un usuario. |
+| `GET` | `/events/{eventId}/users` | | | Devuelve todos los usuarios inscritos a un evento. |
+| `POST` | `/users/{userId}/events` | | `DEFAULT` o `ADMIN` | Crea una inscripción. |
+| `PUT` | `/users/{userId}/events/{eventId}` | UserEvent | `DEFAULT` o `ADMIN` | Actualiza una inscripción. |
+| `DELETE` | `/users/{userId}/events/{eventsId}` | | `DEFAULT` o `ADMIN` | Elimina una inscripción. |
+
+```json
+{
+	"id": "11110000-0000-0000-0000-000000000000",
+	"userId": "11110000-0000-0000-0000-000000000000",
+	"eventId": "11110000-0000-0000-0000-000000000000",
+	"distance": 2.5
+}
+```
+
+## Estructura
 
 ```
 backend/
@@ -57,24 +135,37 @@ backend/
 │   │   ├── java/
 │   │   │   └── com/
 │   │   │       └── example/
+│   │   │           ├── configuration/
+│   │   │           │   ├── WebMvcConfiguration.java
+│   │   │           │   └── WebSecurityConfiguration.java
 │   │   │           ├── controller/
 │   │   │           │   ├── exception/
+│   │   │           │   │   ├── CustomExceptionResponse.java
 │   │   │           │   │   ├── GlobalRestControllerAdvice.java
 │   │   │           │   │   └── ResourceNotFoundException.java
 │   │   │           │   ├── ArticleRestController.java
 │   │   │           │   ├── EventRestController.java
+│   │   │           │   ├── UserEventRestController.java
 │   │   │           │   └── UserRestController.java
 │   │   │           ├── domain/
 │   │   │           │   ├── Article.java
+│   │   │           │   ├── ERole.java
 │   │   │           │   ├── Event.java
-│   │   │           │   └── User.java
+│   │   │           │   ├── User.java
+│   │   │           │   └── UserEvent.java
 │   │   │           ├── repository/
 │   │   │           │   ├── IArticleRepository.java
 │   │   │           │   ├── IEventRepository.java
+│   │   │           │   ├── IUserEventRepository.java
 │   │   │           │   └── IUserRepository.java
+│   │   │           ├── security/
+│   │   │           │   ├── Filter.java
+│   │   │           │   ├── TokenRestController.java
+│   │   │           │   └── TokenService.java
 │   │   │           ├── service/
 │   │   │           │   ├── ArticleService.java
 │   │   │           │   ├── EventService.java
+│   │   │           │   ├── UserEventService.java
 │   │   │           │   └── UserService.java
 │   │   │           └── App.java
 │   │   └── resources/
@@ -95,23 +186,57 @@ backend/
 └── system.properties
 ```
 
+## Dependencias
+
+- [Spring Boot Starter Web](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web)
+- [Spring Boot DevTools](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools)
+- [Spring Boot Starter Test](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test)
+- [Spring Boot Starter Data MongoDB](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb)
+- [Spring Boot Starter Validation](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation)
+- [Bean Validation API](https://mvnrepository.com/artifact/javax.validation/validation-api)
+- [Spring Boot Starter Security](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security)
+- [JSON Web Token Support For The JVM](https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt)
+- [JAXB API](https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api)
+- [Spring Boot Starter Mail](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail)
+
 ## Para desarrolladores
 
 Pasos a seguir:
 
-1. Clona el proyecto: `git clone https://github.com/nuwe-cowboy/backend`.
+1. Clona el proyecto
+
+	`git clone https://github.com/nuwe-cowboy/backend`
 
 #### Línea de comandos
 
-2. Ejecución: `gradlew.bat bootRun` en Windows o `./gradlew bootRun` en Linux.
+2. Ejecución:
+	1. En Windows: `gradlew.bat bootRun`
+	2. En Linux: `./gradlew bootRun`
 
 #### Eclipse
 
-2. Importación: File > Import… > Existing Gradle Project.
-3. Ejecución: Package Explorer > Click derecho encima del nombre del proyecto > Run As > Spring Boot App.
+2. Importación:
 
-Si incluyes nuevas dependencias en `build.gradle`:
+	`File` > `Import…` > `Existing Gradle Project` > `Seleccionar el directorio raíz del proyecto` > `Finish`
+3. Ejecución:
 
-4. Package Explorer > Click derecho encima del nombre del proyecto > Gradle > Refresh Gradle Project.
+	`Package Explorer` > `Click derecho encima del nombre del proyecto` > `Run As` > `Spring Boot App`
 
-*IntelliJ IDEA?*
+4. Si incluyes nuevas dependencias en `build.gradle`:
+
+	`Package Explorer` > `Click derecho encima del nombre del proyecto` > `Gradle` > `Refresh Gradle Project`
+
+#### IntelliJ IDEA
+
+2. Importación:
+
+	`File` > `Open` > `Seleccionar el archivo build.gradle del proyecto` > `Open` > `Open as Project` > `Trust Project`
+3. Ejecución:
+
+	`Run` > `Run App`
+	
+	o bien:
+	
+	`Click derecho encima del main` > `App` > `Run App`
+
+*Made with :heart: by Nuwe Cowboy Team*
