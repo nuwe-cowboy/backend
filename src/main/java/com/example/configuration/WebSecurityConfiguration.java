@@ -27,12 +27,20 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/articles/**", "/events/**").permitAll()
-				.antMatchers(HttpMethod.GET, "/users/**").hasAnyRole("DEFAULT", "ADMIN")
+				.antMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
+				.antMatchers(HttpMethod.GET, "/users/*/**").hasAnyRole("DEFAULT", "ADMIN")
+				
 				.antMatchers(HttpMethod.POST, "/users/default", "/login").permitAll()
 				.antMatchers(HttpMethod.POST, "/articles", "/events", "/users/admin").hasRole("ADMIN")
-				.antMatchers(HttpMethod.PUT, "/articles/**", "/events/**", "/users/**").hasRole("ADMIN")
-				.antMatchers(HttpMethod.DELETE, "/articles/**", "/events/**", "/users/**").hasRole("ADMIN")
-				.anyRequest().authenticated();
+				.antMatchers(HttpMethod.POST, "/users/*/events/*").hasAnyRole("DEFAULT", "ADMIN")
+				
+				.antMatchers(HttpMethod.PUT, "/articles/*", "/events/*", "/users/*").hasRole("ADMIN")
+				.antMatchers(HttpMethod.PUT, "/users/*/events/*").hasAnyRole("DEFAULT", "ADMIN")
+				
+				.antMatchers(HttpMethod.DELETE, "/articles/*", "/events/*", "/users/*").hasRole("ADMIN")
+				.antMatchers(HttpMethod.DELETE, "/users/*/events/*").hasAnyRole("DEFAULT", "ADMIN")
+				
+				.anyRequest().denyAll();
 	}
 	
 	@Bean

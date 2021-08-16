@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -25,6 +26,9 @@ public class Event {
 	@Field("body")
 	@NotBlank(message = "Body is mandatory")
 	private String body;
+	@Field("goal")
+	@NotNull(message = "Goal is mandatory")
+	private double goal;
 	@Field("timestamp")
 	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	private LocalDateTime timestamp;
@@ -45,6 +49,10 @@ public class Event {
 		this.body = body;
 	}
 	
+	public void setGoal(double goal) {
+		this.goal = goal;
+	}
+	
 	public void setTimestamp(LocalDateTime timestamp) {
 		this.timestamp = timestamp;
 	}
@@ -61,13 +69,17 @@ public class Event {
 		return body;
 	}
 	
+	public double getGoal() {
+		return goal;
+	}
+	
 	public LocalDateTime getTimestamp() {
 		return timestamp;
 	}
 	
 	@Override
 	public String toString() {
-		return "Event [id=" + id + ", title" + title + ", body=" + body + ", timestamp=" + timestamp + "]";
+		return "Event [id=" + id + ", title" + title + ", body=" + body + ", goal=" + goal + ", timestamp=" + timestamp + "]";
 	}
 
 }

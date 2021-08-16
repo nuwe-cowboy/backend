@@ -51,13 +51,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{origin}}/users/{{id}}",
+							"raw": "{{origin}}/users/{{userId}}",
 							"host": [
 								"{{origin}}"
 							],
 							"path": [
 								"users",
-								"{{id}}"
+								"{{userId}}"
 							]
 						}
 					},
@@ -70,7 +70,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"default@example.com\"\r\n}",
+							"raw": "{\r\n    \"name\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"test@example.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -152,13 +152,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{origin}}/users/{{id}}",
+							"raw": "{{origin}}/users/{{userId}}",
 							"host": [
 								"{{origin}}"
 							],
 							"path": [
 								"users",
-								"{{id}}"
+								"{{userId}}"
 							]
 						}
 					},
@@ -180,13 +180,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{origin}}/users/{{id}}",
+							"raw": "{{origin}}/users/{{userId}}",
 							"host": [
 								"{{origin}}"
 							],
 							"path": [
 								"users",
-								"{{id}}"
+								"{{userId}}"
 							]
 						}
 					},
@@ -240,13 +240,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{origin}}/articles/{{id}}",
+							"raw": "{{origin}}/articles/{{articleId}}",
 							"host": [
 								"{{origin}}"
 							],
 							"path": [
 								"articles",
-								"{{id}}"
+								"{{articleId}}"
 							]
 						}
 					},
@@ -313,13 +313,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{origin}}/articles/{{id}}",
+							"raw": "{{origin}}/articles/{{articleId}}",
 							"host": [
 								"{{origin}}"
 							],
 							"path": [
 								"articles",
-								"{{id}}"
+								"{{articleId}}"
 							]
 						}
 					},
@@ -341,13 +341,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{origin}}/articles/{{id}}",
+							"raw": "{{origin}}/articles/{{articleId}}",
 							"host": [
 								"{{origin}}"
 							],
 							"path": [
 								"articles",
-								"{{id}}"
+								"{{articleId}}"
 							]
 						}
 					},
@@ -381,13 +381,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{origin}}/events/{{id}}",
+							"raw": "{{origin}}/events/{{eventId}}",
 							"host": [
 								"{{origin}}"
 							],
 							"path": [
 								"events",
-								"{{id}}"
+								"{{eventId}}"
 							]
 						}
 					},
@@ -410,7 +410,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Lorem ipsum\",\r\n    \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc finibus urna condimentum, sodales augue ut, pharetra metus. Vestibulum id nisi sed risus porttitor convallis. Etiam ut luctus leo. Sed venenatis faucibus ligula, vel blandit arcu fermentum lobortis. Morbi dictum tincidunt tortor, sit amet molestie mi euismod id.\"\r\n}",
+							"raw": "{\r\n    \"title\": \"Lorem ipsum\",\r\n    \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc finibus urna condimentum, sodales augue ut, pharetra metus. Vestibulum id nisi sed risus porttitor convallis. Etiam ut luctus leo. Sed venenatis faucibus ligula, vel blandit arcu fermentum lobortis. Morbi dictum tincidunt tortor, sit amet molestie mi euismod id.\",\r\n    \"goal\": 15\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -454,13 +454,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{origin}}/events/{{id}}",
+							"raw": "{{origin}}/events/{{eventId}}",
 							"host": [
 								"{{origin}}"
 							],
 							"path": [
 								"events",
-								"{{id}}"
+								"{{eventId}}"
 							]
 						}
 					},
@@ -482,13 +482,165 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{origin}}/events/{{id}}",
+							"raw": "{{origin}}/events/{{eventId}}",
 							"host": [
 								"{{origin}}"
 							],
 							"path": [
 								"events",
-								"{{id}}"
+								"{{eventId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserEvent",
+			"item": [
+				{
+					"name": "readByUserId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{origin}}/users/{{userId}}/events",
+							"host": [
+								"{{origin}}"
+							],
+							"path": [
+								"users",
+								"{{userId}}",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "readByEventId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{origin}}/events/{{eventId}}/users",
+							"host": [
+								"{{origin}}"
+							],
+							"path": [
+								"events",
+								"{{eventId}}",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{origin}}/users/{{userId}}/events/{{eventId}}",
+							"host": [
+								"{{origin}}"
+							],
+							"path": [
+								"users",
+								"{{userId}}",
+								"events",
+								"{{eventId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"distance\": 2.5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{origin}}/users/{{userId}}/events/{{eventId}}",
+							"host": [
+								"{{origin}}"
+							],
+							"path": [
+								"users",
+								"{{userId}}",
+								"events",
+								"{{eventId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteByUserIdAndEventId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{origin}}/users/{{userId}}/events/{{eventId}}",
+							"host": [
+								"{{origin}}"
+							],
+							"path": [
+								"users",
+								"{{userId}}",
+								"events",
+								"{{eventId}}"
 							]
 						}
 					},
@@ -503,7 +655,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"default@example.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"raw": "{\r\n    \"username\": \"admin@example.com\",\r\n    \"password\": \"123456\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -550,10 +702,19 @@
 		},
 		{
 			"key": "origin",
-			"value": "https://mplqnp.herokuapp.com"
+			"value": "https://mplqnp.herokuapp.com",
+			"disabled": true
 		},
 		{
-			"key": "id",
+			"key": "userId",
+			"value": ""
+		},
+		{
+			"key": "articleId",
+			"value": ""
+		},
+		{
+			"key": "eventId",
 			"value": ""
 		},
 		{
