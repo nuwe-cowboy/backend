@@ -8,9 +8,9 @@ Necesitan una aplicación web y móvil que sea accesible y les ayude a automatiz
 
 ## Enlaces
 
-Frontend: https://muevete.netlify.app/ - Repositorio: https://github.com/nuwe-cowboy/frontend
+Frontend: https://muevete.netlify.app - Repositorio: https://github.com/nuwe-cowboy/frontend
 
-Backend: https://mplqnp.herokuapp.com/
+Backend: https://mplqnp.herokuapp.com
 
 ## Stack
 
@@ -113,9 +113,9 @@ Relación many-to-many. Inscripciones a eventos.
 | :---: | :---: | :---: | :---: | :--- |
 | `GET` | `/users/{userId}/events` | | `DEFAULT` o `ADMIN` | Devuelve todas las inscripciones a eventos de un usuario. |
 | `GET` | `/events/{eventId}/users` | | | Devuelve todos los usuarios inscritos a un evento. |
-| `POST` | `/users/{userId}/events` | | `DEFAULT` o `ADMIN` | Crea una inscripción. |
+| `POST` | `/users/{userId}/events/{eventId}` | | `DEFAULT` o `ADMIN` | Crea una inscripción. |
 | `PUT` | `/users/{userId}/events/{eventId}` | UserEvent | `DEFAULT` o `ADMIN` | Actualiza una inscripción. |
-| `DELETE` | `/users/{userId}/events/{eventsId}` | | `DEFAULT` o `ADMIN` | Elimina una inscripción. |
+| `DELETE` | `/users/{userId}/events/{eventId}` | | `DEFAULT` o `ADMIN` | Elimina una inscripción. |
 
 ```json
 {
@@ -203,8 +203,8 @@ backend/
 
 Pasos a seguir:
 
-1. Clona el proyecto
-
+1. Clona el proyecto:
+	
 	`git clone https://github.com/nuwe-cowboy/backend`
 
 #### Línea de comandos
@@ -216,27 +216,43 @@ Pasos a seguir:
 #### Eclipse
 
 2. Importación:
-
+	
 	`File` > `Import…` > `Existing Gradle Project` > `Seleccionar el directorio raíz del proyecto` > `Finish`
 3. Ejecución:
-
+	
 	`Package Explorer` > `Click derecho encima del nombre del proyecto` > `Run As` > `Spring Boot App`
 
 4. Si incluyes nuevas dependencias en `build.gradle`:
-
+	
 	`Package Explorer` > `Click derecho encima del nombre del proyecto` > `Gradle` > `Refresh Gradle Project`
 
 #### IntelliJ IDEA
 
 2. Importación:
-
+	
 	`File` > `Open` > `Seleccionar el archivo build.gradle del proyecto` > `Open` > `Open as Project` > `Trust Project`
 3. Ejecución:
-
+	
 	`Run` > `Run App`
 	
 	o bien:
 	
 	`Click derecho encima del main` > `App` > `Run App`
+
+### Cómo contribuir
+
+1. Crea tu rama:
+	
+	`git checkout -b funcionalidad`
+	
+	Sustituye «funcionalidad» por un nombre representativo de la funcionalidad que quieres incorporar.
+	
+2. Cuando esté lista la funcionalidad, sube tu rama al repositorio remoto:
+	
+	`git push origin funcionalidad`
+	
+3. [Crea un Pull Request](https://github.com/nuwe-cowboy/backend/pulls):
+	
+	`base: develop 🡐 compare: funcionalidad`
 
 *Made with :heart: by Nuwe Cowboy Team*
