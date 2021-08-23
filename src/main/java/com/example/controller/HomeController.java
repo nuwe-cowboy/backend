@@ -9,13 +9,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/")
 public class HomeController {
 
   @Value("${app.version}")
   private String appVersion;
 
   @GetMapping
-  @RequestMapping
   public Map getStatus(){
     Map map = new HashMap<String, String>();
     map.put("app-version", appVersion);
