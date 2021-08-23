@@ -26,7 +26,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests()
-				.antMatchers(HttpMethod.GET, "/articles/**", "/events/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/", "/articles/**", "/events/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
 				.antMatchers(HttpMethod.GET, "/users/*/**").hasAnyRole("DEFAULT", "ADMIN")
 				
