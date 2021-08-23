@@ -23,7 +23,18 @@ Backend: https://mplqnp.herokuapp.com
 
 ## Endpoints
 
-Autenticación basada en JSON Web Tokens (JWT). Encriptación con BCryptPasswordEncoder.
+| Método | Endpoint | Request body | Rol | Descripción |
+| :---: | :---: | :---: | :---: | :--- |
+| `GET` | `/` | | | Devuelve la versión de la API. |
+
+```json
+{
+	"appVersion": "0.0.1"
+}
+```
+
+- Autenticación y autorización con JSON Web Tokens (JWT).
+- Encriptación con BCryptPasswordEncoder.
 
 | Método | Endpoint | Request body | Rol | Descripción |
 | :---: | :---: | :---: | :---: | :--- |
@@ -35,8 +46,6 @@ Autenticación basada en JSON Web Tokens (JWT). Encriptación con BCryptPassword
 	"password": "123456"
 }
 ```
-
-Algunas peticiones solo se pueden realizar si el usuario está logueado y tiene un rol determinado.
 
 ### Users
 
@@ -160,6 +169,7 @@ backend/
 │   │   │           │   └── IUserRepository.java
 │   │   │           ├── security/
 │   │   │           │   ├── Filter.java
+│   │   │           │   ├── HomeController.java
 │   │   │           │   ├── TokenRestController.java
 │   │   │           │   └── TokenService.java
 │   │   │           ├── service/
@@ -241,9 +251,9 @@ Pasos a seguir:
 
 ### Cómo contribuir
 
-1. Crea tu rama:
+1. Crea una rama a partir de la rama «develop»:
 	
-	`git checkout -b funcionalidad`
+	`git checkout develop` > `git checkout -b funcionalidad`
 	
 	Sustituye «funcionalidad» por un nombre representativo de la funcionalidad que quieres incorporar.
 	
@@ -254,5 +264,13 @@ Pasos a seguir:
 3. [Crea un Pull Request](https://github.com/nuwe-cowboy/backend/pulls):
 	
 	`base: develop 🡐 compare: funcionalidad`
+	
+#### Gitflow
+
+```
+┌── origin/master, heroku/main
+└── origin/develop
+    └── origin/funcionalidad
+```
 
 *Made with :heart: by Nuwe Cowboy Team*
