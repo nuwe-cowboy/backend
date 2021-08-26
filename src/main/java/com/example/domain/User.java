@@ -40,6 +40,15 @@ public class User {
 		id = UUID.randomUUID();
 	}
 	
+	public User(UUID id, String name, String lastName, String email, String password, ERole role) {
+		this.id = id;
+		this.name = name;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
+	
 	public void setId(UUID id) {
 		this.id = id;
 	}
@@ -90,7 +99,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name" + name + ", lastName=" + lastName + ", email=" + email + ", password=" + password + ", role=" + role + "]";
+		return "User [id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email + ", password=" + password + ", role=" + role + "]";
 	}
 
 }
