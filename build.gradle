@@ -18,6 +18,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	
 	// MongoDB
+	implementation 'org.json:json:20210307'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	
 	// Validations

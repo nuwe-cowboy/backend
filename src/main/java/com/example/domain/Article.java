@@ -33,6 +33,13 @@ public class Article {
 		id = UUID.randomUUID();
 	}
 	
+	public Article(UUID id, String title, String body, LocalDateTime timestamp) {
+		this.id = id;
+		this.title = title;
+		this.body = body;
+		this.timestamp = timestamp;
+	}
+	
 	public void setId(UUID id) {
 		this.id = id;
 	}
@@ -67,7 +74,7 @@ public class Article {
 	
 	@Override
 	public String toString() {
-		return "Article [id=" + id + ", title" + title + ", body=" + body + ", timestamp=" + timestamp + "]";
+		return "Article [id=" + id + ", title=" + title + ", body=" + body + ", timestamp=" + timestamp + "]";
 	}
 
 }
