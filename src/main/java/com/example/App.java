@@ -15,8 +15,10 @@ import com.example.domain.Article;
 import com.example.domain.ERole;
 import com.example.domain.Event;
 import com.example.domain.User;
+import com.example.domain.UserEvent;
 import com.example.repository.IArticleRepository;
 import com.example.repository.IEventRepository;
+import com.example.repository.IUserEventRepository;
 import com.example.repository.IUserRepository;
 
 @SpringBootApplication
@@ -30,6 +32,9 @@ public class App {
 	
 	@Autowired
 	private IUserRepository userRepository;
+	
+	@Autowired
+	private IUserEventRepository userEventRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
@@ -42,6 +47,7 @@ public class App {
 			this.loadArticles();
 			this.loadEvents();
 			this.loadUsers();
+			this.loadUserEvents();
 		};
 	}
 	
@@ -71,6 +77,16 @@ public class App {
 		userRepository.save(new User(UUID.fromString("11110000-0000-0000-0000-000000000000"), "John", "Doe", "john@example.com", "$2a$10$4bNJAICKUh8USNvKmSICwud3vkb6ZwVgwDdNY.mWexqcNs4ZdIzrS", ERole.DEFAULT));
 		userRepository.save(new User(UUID.fromString("22220000-0000-0000-0000-000000000000"), "Jane", "Doe", "jane@example.com", "$2a$10$JUs4hN/U73Hrcbf6LV3aW.sZcUTbcVLrcuG5FwDVYsfiRo2afgJ7O", ERole.ADMIN));
 		userRepository.save(new User(UUID.fromString("33330000-0000-0000-0000-000000000000"), "George", "O'Malley", "george@example.com", "$2a$10$dek627gZNaA8MbmUSrLQceLd6YGbvwZlUrO.lks8JMZFdY9RfyHaG", ERole.DEFAULT));
+	}
+	
+	private void loadUserEvents() {
+		userEventRepository.deleteAll();
+		
+		userEventRepository.save(new UserEvent(UUID.fromString("11110000-0000-0000-0000-000000000000"), UUID.fromString("11110000-0000-0000-0000-000000000000"), UUID.fromString("11110000-0000-0000-0000-000000000000"), 10));
+		userEventRepository.save(new UserEvent(UUID.fromString("22220000-0000-0000-0000-000000000000"), UUID.fromString("11110000-0000-0000-0000-000000000000"), UUID.fromString("22220000-0000-0000-0000-000000000000"), 20));
+		userEventRepository.save(new UserEvent(UUID.fromString("33330000-0000-0000-0000-000000000000"), UUID.fromString("22220000-0000-0000-0000-000000000000"), UUID.fromString("11110000-0000-0000-0000-000000000000"), 30));
+		userEventRepository.save(new UserEvent(UUID.fromString("44440000-0000-0000-0000-000000000000"), UUID.fromString("22220000-0000-0000-0000-000000000000"), UUID.fromString("22220000-0000-0000-0000-000000000000"), 40));
+		userEventRepository.save(new UserEvent(UUID.fromString("55550000-0000-0000-0000-000000000000"), UUID.fromString("22220000-0000-0000-0000-000000000000"), UUID.fromString("33330000-0000-0000-0000-000000000000"), 50));
 	}
 
 }

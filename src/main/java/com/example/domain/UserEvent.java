@@ -28,6 +28,13 @@ public class UserEvent {
 		id = UUID.randomUUID();
 	}
 	
+	public UserEvent(UUID id, UUID userId, UUID eventId, double distance) {
+		this.id = id;
+		this.userId = userId;
+		this.eventId = eventId;
+		this.distance = distance;
+	}
+	
 	public void setId(UUID id) {
 		this.id = id;
 	}
