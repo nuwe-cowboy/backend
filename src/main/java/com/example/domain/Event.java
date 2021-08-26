@@ -37,6 +37,14 @@ public class Event {
 		id = UUID.randomUUID();
 	}
 	
+	public Event(UUID id, String title, String body, int goal, LocalDateTime timestamp) {
+		this.id = id;
+		this.title = title;
+		this.body = body;
+		this.goal = goal;
+		this.timestamp = timestamp;
+	}
+	
 	public void setId(UUID id) {
 		this.id = id;
 	}
@@ -79,7 +87,7 @@ public class Event {
 	
 	@Override
 	public String toString() {
-		return "Event [id=" + id + ", title" + title + ", body=" + body + ", goal=" + goal + ", timestamp=" + timestamp + "]";
+		return "Event [id=" + id + ", title=" + title + ", body=" + body + ", goal=" + goal + ", timestamp=" + timestamp + "]";
 	}
 
 }
